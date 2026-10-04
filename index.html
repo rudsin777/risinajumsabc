@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Risinājums ABC - darba aizsardzība un ugunsdrošība, Rēzekne</title>
+<meta name="description" content="Risinājums ABC - sertificēti speciālisti darba aizsardzībā un ugunsdrošībā. Darba vides risku novērtēšana, dokumentācija, uzraudzība, nelaimes gadījumu izmeklēšana. Rēzekne.">
+<script>
+  (function(){
+    var d = document.documentElement;
+    d.classList.add('js');
+    var t = 'light';
+    try{ if(localStorage.getItem('rabc-theme') === 'dark') t = 'dark'; }catch(e){}
+    d.setAttribute('data-theme', t);
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F7F9;
+    --panel:#ECEFF3;
+    --card:#FFFFFF;
+    --ink:#111B27;
+    --ink-soft:#52606F;
+    --line:rgba(17,27,39,.13);
+    --orange:#F26B1D;
+    --orange-hover:#FF8A4A;
+    --orange-soft:#FFE9DA;
+    --stripe-dark:#121B27;
+    --shadow:0 26px 50px -30px rgba(17,27,39,.35);
+    --font-head:'Montserrat','Segoe UI',system-ui,-apple-system,'Helvetica Neue',sans-serif;
+    --font-body:'Inter','Segoe UI',system-ui,-apple-system,'Helvetica Neue',sans-serif;
+    --maxw:1180px;
+    --fade:.25s;
+    --fade-theme:.45s;
+    color-scheme: light;
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E151E;
+    --panel:#141D29;
+    --card:#18232F;
+    --ink:#EEF1F5;
+    --ink-soft:#A9B4C2;
+    --line:rgba(238,241,245,.15);
+    --orange:#FF7A2E;
+    --orange-hover:#FF9A5C;
+    --orange-soft:rgba(255,122,46,.16);
+    --shadow:0 26px 50px -30px rgba(0,0,0,.7);
+    color-scheme: dark;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;transition-delay:0s !important;}
+  }
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color var(--fade-theme) ease,color var(--fade-theme) ease;}
+  img,svg{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;transition:color var(--fade) ease,background-color var(--fade) ease,border-color var(--fade) ease,opacity var(--fade) ease;}
+  h1,h2,h3,h4{font-family:var(--font-head);font-weight:800;margin:0;color:var(--ink);letter-spacing:-.01em;}
+  p{margin:0;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font-family:inherit;cursor:pointer;transition:color var(--fade) ease,background-color var(--fade) ease,border-color var(--fade) ease,opacity var(--fade) ease;}
+  :focus-visible{outline:2px solid var(--orange);outline-offset:3px;}
+  section[id]{scroll-margin-top:72px;}
+
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--orange);color:#111B27;padding:.75rem 1.25rem;z-index:300;border-radius:0 0 8px 0;font-weight:700;}
+  .skip-link:focus{left:0;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);}
+
+  .kicker{font-family:var(--font-body);font-size:.82rem;font-weight:700;color:var(--orange);letter-spacing:.02em;display:inline-flex;align-items:center;gap:.65rem;}
+  .kicker::before{content:"";width:22px;height:7px;border-radius:2px;background:repeating-linear-gradient(-45deg,var(--orange) 0 4px,transparent 4px 8px);display:inline-block;}
+
+  .hazard{height:10px;background:repeating-linear-gradient(-45deg,var(--orange) 0 14px,var(--stripe-dark) 14px 28px);}
+
+  /* header */
+  header{position:sticky;top:0;z-index:200;background:color-mix(in srgb, var(--bg) 90%, transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transition:background-color var(--fade-theme) ease,border-color var(--fade-theme) ease;}
+  .nav-row{display:flex;align-items:center;gap:1.5rem;padding:.75rem 0;}
+  .brand{display:flex;align-items:center;gap:.7rem;flex:none;}
+  .brand-logo{width:40px;height:40px;display:block;border-radius:11px;}
+  .brand-word{font-family:var(--font-head);font-size:1.02rem;font-weight:800;letter-spacing:.01em;line-height:1.1;white-space:nowrap;}
+  .brand-word b{color:var(--orange);font-weight:800;}
+  .brand-word small{display:block;font-family:var(--font-body);font-size:.62rem;font-weight:600;color:var(--ink-soft);letter-spacing:.06em;margin-top:2px;}
+  nav.primary{display:flex;align-items:center;justify-content:center;gap:1.7rem;flex:1;}
+  nav.primary a{font-size:.9rem;font-weight:600;color:var(--ink-soft);position:relative;padding:.2rem 0;}
+  nav.primary a:hover{color:var(--ink);}
+  nav.primary a::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .25s ease;}
+  nav.primary a:hover::after{transform:scaleX(1);}
+  .header-actions{display:flex;align-items:center;gap:.75rem;margin-left:auto;}
+  nav.primary + .header-actions{margin-left:0;}
+
+  .lang-switch{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;transition:border-color var(--fade-theme) ease;}
+  .lang-switch button{background:none;border:none;padding:.4rem .65rem;font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--ink-soft);transition:background-color var(--fade) ease,color var(--fade) ease;}
+  .lang-switch button:hover{color:var(--ink);}
+  .lang-switch button[aria-pressed="true"]{background:var(--orange);color:#111B27;}
+
+  .icon-btn{width:2.3rem;height:2.3rem;border-radius:50%;border:1px solid var(--line);background:none;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);flex:none;transition:border-color var(--fade) ease,color var(--fade) ease,background-color var(--fade) ease;}
+  .icon-btn:hover{border-color:var(--orange);color:var(--orange);}
+  .icon-btn svg{width:1.05rem;height:1.05rem;}
+
+  .btn{display:inline-flex;align-items:center;gap:.55rem;padding:.78rem 1.45rem;border-radius:999px;font-weight:700;font-size:.88rem;border:1px solid transparent;transition:background-color var(--fade) ease,color var(--fade) ease,border-color var(--fade) ease,box-shadow var(--fade) ease;white-space:nowrap;cursor:pointer;font-family:var(--font-body);}
+  .btn svg{width:1rem;height:1rem;flex:none;}
+  .btn-solid{background:var(--orange);color:#111B27;box-shadow:0 14px 26px -14px rgba(242,107,29,.75);}
+  .btn-solid:hover{background:var(--orange-hover);box-shadow:0 18px 30px -14px rgba(242,107,29,.85);}
+  .btn-line{background:transparent;color:var(--ink);border-color:var(--line);}
+  .btn-line:hover{background:var(--panel);border-color:var(--orange);}
+  .btn-line.on-dark{color:#fff;border-color:rgba(255,255,255,.5);}
+  .btn-line.on-dark:hover{background:rgba(255,255,255,.14);border-color:#fff;}
+  .btn-sm{padding:.6rem 1.1rem;font-size:.82rem;}
+
+  .menu-toggle{display:none;width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid var(--line);background:none;position:relative;flex:none;transition:border-color var(--fade) ease,background-color var(--fade) ease;}
+  .menu-toggle:hover{border-color:var(--orange);}
+  .menu-toggle i{position:absolute;left:50%;top:50%;width:18px;height:2px;margin-left:-9px;background:var(--ink);border-radius:2px;transition:transform .35s ease,opacity .25s ease,background-color var(--fade) ease;}
+  .menu-toggle i:nth-child(1){transform:translateY(-6px);}
+  .menu-toggle i:nth-child(3){transform:translateY(6px);}
+  .menu-toggle:hover i{background:var(--orange);}
+  .menu-toggle[aria-expanded="true"] i:nth-child(1){transform:rotate(45deg);}
+  .menu-toggle[aria-expanded="true"] i:nth-child(2){opacity:0;}
+  .menu-toggle[aria-expanded="true"] i:nth-child(3){transform:rotate(-45deg);}
+
+  /* mobile + tablet menu panel */
+  .mobile-nav{position:fixed;inset:0;z-index:190;background:var(--bg);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:.4rem;padding:5.5rem clamp(1.5rem,6vw,4rem) 2.5rem;overflow-y:auto;
+    visibility:hidden;pointer-events:none;clip-path:circle(0px at calc(100% - 2.6rem) 2.2rem);
+    transition:clip-path .7s cubic-bezier(.7,0,.2,1),visibility 0s linear .7s,background-color var(--fade-theme) ease;}
+  .mobile-nav.open{visibility:visible;pointer-events:auto;clip-path:circle(160% at calc(100% - 2.6rem) 2.2rem);
+    transition:clip-path .7s cubic-bezier(.7,0,.2,1),visibility 0s linear 0s,background-color var(--fade-theme) ease;}
+  .m-link{font-family:var(--font-head);font-weight:800;font-size:clamp(1.7rem,6vw,2.4rem);color:var(--ink);padding:.3rem 0;opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease,color var(--fade) ease;}
+  .m-link:hover{color:var(--orange);}
+  .mobile-nav.open .m-link,.mobile-nav.open .m-extra{opacity:1;transform:none;transition-delay:calc(.28s + var(--i,0) * .07s);}
+  .mobile-nav.open .m-link:hover{transition-delay:0s;}
+  .m-extra{margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;}
+  .m-contact{margin-top:1.6rem;color:var(--ink-soft);font-size:.92rem;opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;}
+  .mobile-nav.open .m-contact{opacity:1;transform:none;transition-delay:.85s;}
+  .m-contact a{color:var(--ink);font-weight:700;}
+  .m-contact a:hover{color:var(--orange);}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;min-height:clamp(600px,92vh,840px);display:flex;align-items:center;padding:clamp(4rem,9vw,7rem) 0 clamp(5rem,8vw,7rem);}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:linear-gradient(160deg,#0F1A27,#233449);}
+  .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(11,18,28,.55) 0%,rgba(11,18,28,.72) 55%,rgba(11,18,28,.9) 100%),linear-gradient(90deg,rgba(11,18,28,.6) 0%,rgba(11,18,28,.12) 65%);}
+  .hero .wrap{position:relative;z-index:2;width:100%;}
+  .hero-copy{max-width:41rem;}
+  .hero-copy .kicker{color:#FFB083;}
+  .hero-copy .kicker::before{background:repeating-linear-gradient(-45deg,#FFB083 0 4px,transparent 4px 8px);}
+  .hero-copy h1{color:#fff;font-size:clamp(2.35rem,5.2vw,4.1rem);line-height:1.06;margin:1rem 0 1.2rem;text-shadow:0 2px 26px rgba(0,0,0,.35);}
+  .hero-copy p.lede{font-size:clamp(1rem,1.5vw,1.14rem);color:rgba(255,255,255,.86);max-width:50ch;margin-bottom:1.6rem;}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2rem;}
+  .chip{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .85rem;border:1px solid rgba(255,255,255,.28);border-radius:999px;color:#fff;font-size:.82rem;font-weight:600;background:rgba(255,255,255,.06);}
+  .chip svg{width:.95rem;height:.95rem;color:#FFB083;}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:1rem;}
+  .hero .hazard{position:absolute;left:0;right:0;bottom:0;z-index:2;}
+  .hero-pause{position:absolute;right:clamp(1.25rem,4vw,3rem);bottom:1.9rem;z-index:3;width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(11,18,28,.5);color:#fff;display:flex;align-items:center;justify-content:center;transition:border-color var(--fade) ease,background-color var(--fade) ease;}
+  .hero-pause:hover{border-color:#fff;background:rgba(11,18,28,.75);}
+  .hero-pause svg{width:1rem;height:1rem;}
+
+  /* stats */
+  .stats{background:var(--card);border-bottom:1px solid var(--line);transition:background-color var(--fade-theme) ease,border-color var(--fade-theme) ease;}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);}
+  .stat{padding:2rem clamp(1rem,3vw,2rem);border-right:1px solid var(--line);transition:border-color var(--fade-theme) ease;}
+  .stat:first-child{padding-left:0;}
+  .stat:last-child{border-right:none;}
+  .stat-n{font-family:var(--font-head);font-weight:800;font-size:clamp(1.9rem,4vw,2.9rem);line-height:1;color:var(--ink);}
+  .stat-n span{color:var(--orange);}
+  .stat-l{margin-top:.55rem;color:var(--ink-soft);font-size:.9rem;max-width:26ch;}
+
+  section{padding:clamp(3.6rem,8vw,6.5rem) 0;transition:background-color var(--fade-theme) ease;}
+  .section-head{max-width:62ch;margin-bottom:clamp(2.2rem,4vw,3.2rem);}
+  .section-head h2{font-size:clamp(1.8rem,3.4vw,2.7rem);margin:.8rem 0 .9rem;line-height:1.14;}
+  .section-head p{color:var(--ink-soft);font-size:1.03rem;}
+  .panel{background:var(--panel);}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,6vw,5rem);align-items:start;}
+  .about-grid h2{font-size:clamp(1.8rem,3.4vw,2.7rem);margin:.8rem 0 1.2rem;line-height:1.14;}
+  .about-text{color:var(--ink-soft);font-size:1.04rem;max-width:58ch;margin-bottom:1.1rem;}
+  .about-quote{margin-top:1.8rem;padding-left:1.2rem;border-left:3px solid var(--orange);font-family:var(--font-head);font-weight:700;font-size:1.12rem;line-height:1.5;max-width:42ch;}
+  .fact-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:2.4rem 1.8rem 1.4rem;overflow:hidden;transition:background-color var(--fade-theme) ease,border-color var(--fade-theme) ease;}
+  .fact-card::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:repeating-linear-gradient(-45deg,var(--orange) 0 12px,var(--stripe-dark) 12px 24px);}
+  .fact{display:flex;gap:1rem;padding:1.15rem 0;border-bottom:1px solid var(--line);transition:border-color var(--fade-theme) ease;}
+  .fact:last-child{border-bottom:none;}
+  .fact-ic{width:2.7rem;height:2.7rem;border-radius:12px;background:var(--orange-soft);color:var(--orange);display:flex;align-items:center;justify-content:center;flex:none;transition:background-color var(--fade-theme) ease;}
+  .fact-ic svg{width:1.35rem;height:1.35rem;}
+  .fact h3{font-size:1rem;margin-bottom:.2rem;}
+  .fact p{font-size:.9rem;color:var(--ink-soft);}
+
+  /* services */
+  .svc-list{border-top:1px solid var(--line);transition:border-color var(--fade-theme) ease;}
+  .svc{display:grid;grid-template-columns:5rem 1fr 1.25fr;gap:clamp(1rem,3vw,2.5rem);align-items:start;padding:2rem clamp(.5rem,1.5vw,1.2rem);border-bottom:1px solid var(--line);transition:background-color var(--fade) ease,border-color var(--fade-theme) ease;}
+  .svc:hover{background:var(--card);}
+  .svc-n{font-family:var(--font-head);font-weight:800;font-size:2.2rem;line-height:1;color:var(--ink-soft);opacity:.4;transition:color var(--fade) ease,opacity var(--fade) ease;}
+  .svc:hover .svc-n{color:var(--orange);opacity:1;}
+  .svc h3{font-size:clamp(1.15rem,1.9vw,1.4rem);line-height:1.25;}
+  .svc ul li{position:relative;padding:.32rem 0 .32rem 1.3rem;color:var(--ink-soft);font-size:.94rem;}
+  .svc ul li::before{content:"";position:absolute;left:0;top:.85rem;width:7px;height:7px;border-radius:2px;background:var(--orange);}
+
+  /* process */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.2rem,3vw,2.2rem);}
+  .step{position:relative;padding-top:1.5rem;border-top:2px solid var(--line);transition:border-color var(--fade-theme) ease;}
+  .step::before{content:"";position:absolute;top:-2px;left:0;width:3.2rem;height:2px;background:var(--orange);}
+  .step-n{font-family:var(--font-head);font-weight:800;font-size:.95rem;color:var(--orange);margin-bottom:.6rem;}
+  .step h3{font-size:1.15rem;margin-bottom:.5rem;}
+  .step p{color:var(--ink-soft);font-size:.94rem;}
+
+  /* quality */
+  .quality-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,6vw,5rem);align-items:start;}
+  .quality-grid h2{font-size:clamp(1.8rem,3.4vw,2.7rem);margin:.8rem 0 1rem;line-height:1.14;}
+  .quality-intro{color:var(--ink-soft);font-size:1.03rem;}
+  .q-list li{display:flex;gap:1rem;align-items:flex-start;padding:1rem 0;border-bottom:1px solid var(--line);transition:border-color var(--fade-theme) ease;}
+  .q-list li:first-child{border-top:1px solid var(--line);}
+  .q-ic{width:1.9rem;height:1.9rem;border-radius:50%;background:var(--orange-soft);color:var(--orange);display:flex;align-items:center;justify-content:center;flex:none;margin-top:.1rem;}
+  .q-ic svg{width:1rem;height:1rem;}
+  .q-list p{font-size:.98rem;}
+
+  .survey{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:clamp(2.4rem,5vw,3.5rem);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1.7rem clamp(1.3rem,3vw,2.2rem);transition:background-color var(--fade-theme) ease,border-color var(--fade-theme) ease;}
+  .survey h3{font-size:1.15rem;margin-bottom:.35rem;}
+  .survey p{color:var(--ink-soft);font-size:.94rem;max-width:60ch;}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:start;}
+  .info-list{border-top:1px solid var(--line);margin-bottom:1.6rem;transition:border-color var(--fade-theme) ease;}
+  .info-item{display:grid;grid-template-columns:8.5rem 1fr;gap:1rem;padding:1.15rem 0;border-bottom:1px solid var(--line);transition:border-color var(--fade-theme) ease;}
+  .info-item .label{font-size:.78rem;font-weight:700;color:var(--orange);letter-spacing:.02em;padding-top:.15rem;}
+  .info-item .value{color:var(--ink);}
+  .info-item .value a{font-weight:600;}
+  .info-item .value a:hover{color:var(--orange);}
+  .socials{display:flex;flex-wrap:wrap;gap:.7rem;}
+  .form-card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:clamp(1.4rem,3vw,2.1rem);transition:background-color var(--fade-theme) ease,border-color var(--fade-theme) ease;}
+  .field{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem;}
+  .field label{font-size:.8rem;font-weight:700;color:var(--ink);}
+  .field label i{color:var(--orange);font-style:normal;}
+  .field input,.field select,.field textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:.78rem .95rem;width:100%;transition:border-color var(--fade) ease,box-shadow var(--fade) ease,background-color var(--fade-theme) ease,color var(--fade-theme) ease;}
+  .field textarea{resize:vertical;min-height:110px;}
+  .field input:hover,.field select:hover,.field textarea:hover{border-color:var(--ink-soft);}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(242,107,29,.22);}
+  .field.invalid input{border-color:#D93636;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .form-note{font-size:.82rem;color:var(--ink-soft);margin-top:.9rem;}
+  .form-error{font-size:.85rem;color:#D93636;margin-top:.8rem;min-height:1.2em;font-weight:600;}
+
+  /* footer */
+  footer{background:var(--panel);color:var(--ink);transition:background-color var(--fade-theme) ease,color var(--fade-theme) ease;}
+  .footer-main{padding:3rem 0 2rem;}
+  .footer-grid{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem;padding-bottom:2rem;border-bottom:1px solid var(--line);transition:border-color var(--fade-theme) ease;}
+  .footer-brand p{max-width:32ch;font-size:.9rem;color:var(--ink-soft);margin-top:1rem;}
+  .footer-links{display:flex;gap:3rem;flex-wrap:wrap;}
+  .footer-links h4{font-size:.82rem;margin-bottom:.9rem;}
+  .footer-links a{display:block;color:var(--ink-soft);font-size:.9rem;margin-bottom:.5rem;}
+  .footer-links a:hover{color:var(--orange);text-decoration:underline;}
+  .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;font-size:.82rem;color:var(--ink-soft);}
+  .footer-lang{display:flex;gap:.5rem;}
+  .footer-lang button{background:none;border:1px solid var(--line);color:var(--ink);padding:.3rem .65rem;border-radius:999px;font-size:.72rem;font-weight:700;transition:background-color var(--fade) ease,border-color var(--fade) ease,color var(--fade) ease;}
+  .footer-lang button:hover{border-color:var(--orange);}
+  .footer-lang button[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:#111B27;}
+
+  /* reveal on scroll */
+  .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease,background-color var(--fade-theme) ease,border-color var(--fade-theme) ease,color var(--fade-theme) ease;}
+  .js .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){ .js .reveal{opacity:1;transform:none;} }
+
+  /* tablet */
+  @media (max-width:1023px){
+    nav.primary{display:none;}
+    .menu-toggle{display:block;}
+    .header-actions{margin-left:auto;}
+    .header-actions .btn{display:none;}
+    .about-grid,.quality-grid,.contact-grid{grid-template-columns:1fr;}
+    .svc{grid-template-columns:3.5rem 1fr;}
+    .svc ul{grid-column:2;}
+    .steps{grid-template-columns:repeat(2,1fr);row-gap:2.2rem;}
+  }
+  /* mobile */
+  @media (max-width:640px){
+    .wrap.nav-row{padding-left:1rem;padding-right:1rem;gap:.75rem;}
+    nav.primary + .header-actions{margin-left:auto;}
+    .lang-switch{display:none;}
+    .brand-word small{display:none;}
+    .brand-word{font-size:.98rem;}
+    .stats-grid{grid-template-columns:1fr;}
+    .stat{border-right:none;border-bottom:1px solid var(--line);padding:1.4rem 0;}
+    .stat:last-child{border-bottom:none;}
+    .svc{grid-template-columns:1fr;gap:.7rem;padding:1.6rem .4rem;}
+    .svc ul{grid-column:1;}
+    .svc-n{font-size:1.5rem;}
+    .steps{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;gap:0;}
+    .info-item{grid-template-columns:1fr;gap:.3rem;}
+    .footer-grid{flex-direction:column;}
+    .hero-pause{bottom:1.6rem;}
+  }
+  /* very small phones: keep logo + buttons on one row with side space */
+  @media (max-width:360px){
+    .wrap.nav-row{padding-left:.875rem;padding-right:.875rem;}
+    header .brand-logo{width:34px;height:34px;}
+    header .brand{gap:.55rem;}
+    header .brand-word{font-size:.88rem;}
+    .header-actions{gap:.5rem;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="skip">Pāriet uz saturu</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="ic-shield"><path d="M12 3 5 6v5.5c0 4.3 2.9 8.2 7 9.5 4.1-1.3 7-5.2 7-9.5V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m8.8 12.2 2.3 2.3 4.2-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="ic-award"><circle cx="12" cy="9" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m8.8 13.4-1.5 7 4.7-2.6 4.7 2.6-1.5-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></g>
+    <g id="ic-users"><circle cx="9" cy="8.5" r="3.3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 19c.4-3.2 2.8-5 6-5s5.6 1.8 6 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 5.6a3.2 3.2 0 0 1 0 5.8M17.5 14.3c2 .5 3.2 2 3.5 4.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+    <g id="ic-check"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="ic-clock"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+    <g id="ic-phone"><path d="M7 3h3l1.5 4L9.5 8.5c.8 2.3 2.7 4.2 5 5l1.5-2L20 13v3a2 2 0 0 1-2.2 2C11.5 17.6 6.4 12.5 5.9 6.2A2 2 0 0 1 7 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></g>
+    <g id="ic-pin"><path d="M12 21s-7-7.2-7-12a7 7 0 1 1 14 0c0 4.8-7 12-7 12Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/></g>
+    <g id="ic-wa"><path d="M12 3.5a8.4 8.4 0 0 0-7.2 12.8L3.5 20.5l4.4-1.3A8.4 8.4 0 1 0 12 3.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.6 8.3c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.4.2.5.6 1.5.7 1.6.1.2.1.3 0 .5-.1.2-.2.3-.4.5-.1.2-.3.3-.1.6.2.4.8 1.2 1.7 1.9 1.1.9 1.9 1.2 2.2 1.3.3.1.4.1.6-.1.2-.2.7-.8.9-1.1.2-.2.4-.2.6-.1l1.7.8c.2.1.4.2.4.4.1.5 0 1.4-.4 1.8-.4.4-1.4.8-2 .7-.5 0-2.1-.4-4-2.1-1.9-1.7-2.9-3.3-3.1-3.9-.2-.6-.6-1.4.1-2.5Z" fill="currentColor"/></g>
+    <g id="ic-fb"><path d="M14 21v-7h2.3l.4-3H14V9c0-.87.24-1.46 1.5-1.46H17V5.1c-.26-.03-1.15-.1-2.18-.1-2.16 0-3.64 1.32-3.64 3.74V11H8.7v3H11.2v7H14Z" fill="currentColor"/></g>
+    <g id="ic-msg"><path d="M12 3.3c-5 0-9 3.7-9 8.4 0 2.6 1.2 4.9 3.2 6.4V21l3-1.7c.9.3 1.8.4 2.8.4 5 0 9-3.7 9-8.4S17 3.3 12 3.3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m6.9 13.9 3.4-3.6 2.1 2 3.2-2.4-3.4 3.7-2.1-2Z" fill="currentColor"/></g>
+    <g id="ic-arrow"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="ic-sun"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5.1" y1="5.1" x2="6.8" y2="6.8"/><line x1="17.2" y1="17.2" x2="18.9" y2="18.9"/><line x1="5.1" y1="18.9" x2="6.8" y2="17.2"/><line x1="17.2" y1="6.8" x2="18.9" y2="5.1"/></g></g>
+    <g id="ic-moon"><path d="M20 14.2A8.2 8.2 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></g>
+    <g id="ic-pause"><rect x="6" y="4.5" width="4.5" height="15" rx="1" fill="currentColor"/><rect x="13.5" y="4.5" width="4.5" height="15" rx="1" fill="currentColor"/></g>
+    <g id="ic-play"><path d="M6 4.5v15l14-7.5z" fill="currentColor"/></g>
+  </defs>
+</svg>
+
+<a id="home"></a>
+<header>
+  <div class="wrap nav-row">
+    <a class="brand" href="#home" aria-label="Risinājums ABC">
+      <img src="logo.svg" alt="" class="brand-logo" width="40" height="40">
+      <span class="brand-word">RISINĀJUMS <b>ABC</b><small data-i18n="slogan">Ceļš uz veiksmi</small></span>
+    </a>
+    <nav class="primary" aria-label="Primary">
+      <a href="#about" data-i18n="nav.about">Par mums</a>
+      <a href="#services" data-i18n="nav.services">Pakalpojumi</a>
+      <a href="#process" data-i18n="nav.process">Kā strādājam</a>
+      <a href="#quality" data-i18n="nav.quality">Kvalitāte</a>
+      <a href="#contact" data-i18n="nav.contact">Kontakti</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-lang="lv" aria-pressed="true">LV</button>
+        <button data-lang="ru" aria-pressed="false">RU</button>
+        <button data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="icon-btn" id="themeToggle" aria-label="Dark mode" aria-pressed="false">
+        <svg viewBox="0 0 24 24" id="themeIcon"><use href="#ic-moon"/></svg>
+      </button>
+      <a class="btn btn-solid btn-sm" href="#contact">
+        <span data-i18n="cta_request">Nosūtīt pieprasījumu</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile" aria-hidden="true">
+  <a class="m-link" style="--i:0" href="#about" data-i18n="nav.about">Par mums</a>
+  <a class="m-link" style="--i:1" href="#services" data-i18n="nav.services">Pakalpojumi</a>
+  <a class="m-link" style="--i:2" href="#process" data-i18n="nav.process">Kā strādājam</a>
+  <a class="m-link" style="--i:3" href="#quality" data-i18n="nav.quality">Kvalitāte</a>
+  <a class="m-link" style="--i:4" href="#contact" data-i18n="nav.contact">Kontakti</a>
+  <div class="m-extra" style="--i:5">
+    <div class="lang-switch" role="group" aria-label="Language" style="display:flex;">
+      <button data-lang="lv" aria-pressed="true">LV</button>
+      <button data-lang="ru" aria-pressed="false">RU</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn-solid btn-sm" href="#contact"><span data-i18n="cta_request">Nosūtīt pieprasījumu</span></a>
+  </div>
+  <p class="m-contact"><a href="tel:+37129401313">+371 29 401 313</a> &nbsp;|&nbsp; <a href="tel:+37126629226">+371 26 629 226</a></p>
+</nav>
+
+<main id="main">
+
+  <section class="hero" style="padding-top:clamp(4rem,9vw,7rem);">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="https://assets.mixkit.co/videos/1436/1436-thumb-720-0.jpg">
+      <source src="https://assets.mixkit.co/videos/1436/1436-720.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="kicker" data-i18n="hero_kicker">Darba aizsardzība un ugunsdrošība</span>
+        <h1 data-i18n="hero_title">Droša darba vide - ceļš uz veiksmi</h1>
+        <p class="lede" data-i18n="hero_lede">Sertificētu speciālistu komanda darba aizsardzības un ugunsdrošības jomā - Latvijas tirgū kopš 2008. gada.</p>
+        <div class="hero-chips">
+          <span class="chip"><svg viewBox="0 0 24 24"><use href="#ic-award"/></svg><span data-i18n="chip_iso">ISO 9001</span></span>
+          <span class="chip"><svg viewBox="0 0 24 24"><use href="#ic-clock"/></svg><span data-i18n="chip_since">Kopš 2008. gada</span></span>
+          <span class="chip"><svg viewBox="0 0 24 24"><use href="#ic-shield"/></svg><span data-i18n="chip_cert">Sertificēti speciālisti</span></span>
+        </div>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="#contact"><span data-i18n="cta_request">Nosūtīt pieprasījumu</span><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></a>
+          <a class="btn btn-line on-dark" href="#services"><span data-i18n="cta_services">Skatīt pakalpojumus</span></a>
+        </div>
+      </div>
+    </div>
+    <button class="hero-pause" id="heroPause" aria-label="Pause background video" aria-pressed="false">
+      <svg viewBox="0 0 24 24" id="heroPauseIcon"><use href="#ic-pause"/></svg>
+    </button>
+    <div class="hazard" aria-hidden="true"></div>
+  </section>
+
+  <div class="stats">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat"><div class="stat-n">2008</div><p class="stat-l" data-i18n="stat1">uzņēmuma darbības sākums Latvijas tirgū</p></div>
+        <div class="stat"><div class="stat-n">ISO <span>9001</span></div><p class="stat-l" data-i18n="stat2">sertificēta kvalitātes vadības sistēma</p></div>
+        <div class="stat"><div class="stat-n">5</div><p class="stat-l" data-i18n="stat3">pakalpojumu virzieni darba aizsardzībā un ugunsdrošībā</p></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <span class="kicker" data-i18n="about_kicker">Par mums</span>
+        <h2 data-i18n="about_title">Sertificētu speciālistu komanda</h2>
+        <p class="about-text" data-i18n="about_p1">Uzņēmums sekmīgi darbojas Latvijas tirgū jau kopš 2008. gada, sniedzot pakalpojumus darba aizsardzības un ugunsdrošības jomās.</p>
+        <p class="about-text" data-i18n="about_p2">"Risinājums ABC" ir uzņēmums, kas ieguvis kompetentas institūcijas statusu un pilda darba aizsardzības prasības uzņēmumos atbilstoši Latvijas Republikas likumdošanai. Uzņēmums ir sertificēts saskaņā ar standartu ISO 9001.</p>
+        <p class="about-text" data-i18n="about_p3">Speciālisti individuāli izvērtē situāciju katrā uzņēmumā vai iestādē. Pareizi izstrādāta darba aizsardzības sistēma veicinās uzņēmuma attīstību un radīs drošu vidi Jums un Jūsu darbiniekiem.</p>
+        <p class="about-quote" data-i18n="about_quote">Mums svarīgas ilgtermiņa, atklātas un uzticības pilnas attiecības, nevis īstermiņa ieguvums.</p>
+      </div>
+      <div class="fact-card reveal">
+        <div class="fact">
+          <div class="fact-ic"><svg viewBox="0 0 24 24"><use href="#ic-award"/></svg></div>
+          <div><h3 data-i18n="fact1_t">ISO 9001</h3><p data-i18n="fact1_d">Sertificēts saskaņā ar kvalitātes vadības standartu</p></div>
+        </div>
+        <div class="fact">
+          <div class="fact-ic"><svg viewBox="0 0 24 24"><use href="#ic-shield"/></svg></div>
+          <div><h3 data-i18n="fact2_t">Kompetentas institūcijas statuss</h3><p data-i18n="fact2_d">Darba aizsardzības prasību izpilde atbilstoši Latvijas likumdošanai</p></div>
+        </div>
+        <div class="fact">
+          <div class="fact-ic"><svg viewBox="0 0 24 24"><use href="#ic-users"/></svg></div>
+          <div><h3 data-i18n="fact3_t">Sertificēti speciālisti</h3><p data-i18n="fact3_d">Individuāla pieeja katram uzņēmumam un iestādei</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="panel">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker" data-i18n="services_kicker">Pakalpojumi</span>
+        <h2 data-i18n="services_title">Ko mēs piedāvājam</h2>
+        <p data-i18n="services_sub">Pilns darba aizsardzības un ugunsdrošības pakalpojumu klāsts - no risku novērtēšanas līdz interešu pārstāvēšanai inspekcijās.</p>
+      </div>
+      <div class="svc-list reveal">
+        <article class="svc">
+          <div class="svc-n">01</div>
+          <h3 data-i18n="svc1_t">Darba vides risku novērtēšana un noteikšana</h3>
+          <ul data-i18n-list="svc1_items"></ul>
+        </article>
+        <article class="svc">
+          <div class="svc-n">02</div>
+          <h3 data-i18n="svc2_t">Dokumentācijas izstrādāšana</h3>
+          <ul data-i18n-list="svc2_items"></ul>
+        </article>
+        <article class="svc">
+          <div class="svc-n">03</div>
+          <h3 data-i18n="svc3_t">Darba vides iekšējās uzraudzības pakalpojumi</h3>
+          <ul data-i18n-list="svc3_items"></ul>
+        </article>
+        <article class="svc">
+          <div class="svc-n">04</div>
+          <h3 data-i18n="svc4_t">Nelaimes gadījumu darbā izmeklēšana</h3>
+          <ul data-i18n-list="svc4_items"></ul>
+        </article>
+        <article class="svc">
+          <div class="svc-n">05</div>
+          <h3 data-i18n="svc5_t">Ugunsdrošība</h3>
+          <ul data-i18n-list="svc5_items"></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker" data-i18n="process_kicker">Kā mēs strādājam</span>
+        <h2 data-i18n="process_title">No izvērtēšanas līdz drošai darba videi</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><div class="step-n">01</div><h3 data-i18n="step1_t">Izvērtējam</h3><p data-i18n="step1_d">Apsekojam darba vietas un darba veidus, analizējam situāciju un riskus.</p></div>
+        <div class="step reveal"><div class="step-n">02</div><h3 data-i18n="step2_t">Izstrādājam</h3><p data-i18n="step2_d">Sagatavojam instrukcijas, plānus un nepieciešamo dokumentāciju.</p></div>
+        <div class="step reveal"><div class="step-n">03</div><h3 data-i18n="step3_t">Apmācām</h3><p data-i18n="step3_d">Instruējam un apmācām darbiniekus darba aizsardzībā un ugunsdrošībā.</p></div>
+        <div class="step reveal"><div class="step-n">04</div><h3 data-i18n="step4_t">Uzraugām</h3><p data-i18n="step4_d">Sekojam līdzi izpildei un pārstāvam Jūsu intereses inspekcijās.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quality" class="panel">
+    <div class="wrap">
+      <div class="quality-grid">
+        <div class="reveal">
+          <span class="kicker" data-i18n="quality_kicker">Kvalitāte</span>
+          <h2 data-i18n="quality_title">Kvalitātes politika</h2>
+          <p class="quality-intro" data-i18n="quality_intro">SIA „Risinājums ABC” apņemas:</p>
+        </div>
+        <ul class="q-list reveal">
+          <li><span class="q-ic"><svg viewBox="0 0 24 24"><use href="#ic-check"/></svg></span><p data-i18n="q1">sniegt kvalitatīvus un nepārtraukti pilnveidotus darba aizsardzības pakalpojumus esošajiem klientiem</p></li>
+          <li><span class="q-ic"><svg viewBox="0 0 24 24"><use href="#ic-check"/></svg></span><p data-i18n="q2">palīdzēt klientiem izveidot un uzturēt drošu darba vidi</p></li>
+          <li><span class="q-ic"><svg viewBox="0 0 24 24"><use href="#ic-check"/></svg></span><p data-i18n="q3">regulāri apgūt jaunas darba vides risku novērtējuma metodes un tehnoloģijas (tehniskos resursus)</p></li>
+          <li><span class="q-ic"><svg viewBox="0 0 24 24"><use href="#ic-check"/></svg></span><p data-i18n="q4">ar savu darba kvalitāti panākt, ka mūs iesaka jauniem klientiem</p></li>
+          <li><span class="q-ic"><svg viewBox="0 0 24 24"><use href="#ic-check"/></svg></span><p data-i18n="q5">ievērojot likumdošanas un citu normatīvo aktu prasības, nepārtraukti tiekties pilnveidot savu pārvaldības sistēmu</p></li>
+        </ul>
+      </div>
+      <div class="survey reveal">
+        <div>
+          <h3 data-i18n="survey_t">Cienījamais klient!</h3>
+          <p data-i18n="survey_d">Mēs vēlamies noskaidrot Jūsu viedokli par mūsu sniegtajiem pakalpojumiem. Aptaujas aizpildīšana neaizņems vairāk par 5 minūtēm.</p>
+        </div>
+        <a class="btn btn-line" href="https://risinajumsabc.lv/aptauja" target="_blank" rel="noopener"><span data-i18n="survey_btn">Aizpildīt aptauju</span><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker" data-i18n="contact_kicker">Kontakti</span>
+        <h2 data-i18n="contact_title">Sazinieties ar mums</h2>
+        <p data-i18n="contact_lede">Aprakstiet savu uzdevumu - atbildēsim un piedāvāsim risinājumu.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="info-list">
+            <div class="info-item"><span class="label" data-i18n="lbl_address">Biroja adrese</span><span class="value">SIA "RISINĀJUMS ABC"<br>18. novembra iela 16<br>Rēzekne, LV-4601</span></div>
+            <div class="info-item"><span class="label" data-i18n="lbl_phone">Tālrunis</span><span class="value"><a href="tel:+37129401313">+371 29 401 313</a><br><a href="tel:+37126629226">+371 26 629 226</a></span></div>
+            <div class="info-item"><span class="label" data-i18n="lbl_messengers">Sazināties</span>
+              <span class="value socials">
+                <a class="btn btn-line btn-sm" href="https://wa.me/37129401313" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><use href="#ic-wa"/></svg>WhatsApp</a>
+                <a class="btn btn-line btn-sm" href="https://m.me/378346845573367" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><use href="#ic-msg"/></svg>Messenger</a>
+                <a class="btn btn-line btn-sm" href="https://www.facebook.com/pages/Risin%C4%81jums-ABC-SIA/378346845573367" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><use href="#ic-fb"/></svg>Facebook</a>
+              </span>
+            </div>
+          </div>
+          <a class="btn btn-solid" href="https://www.google.com/maps/search/?api=1&query=18.+novembra+iela+16+R%C4%93zekne" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><use href="#ic-pin"/></svg><span data-i18n="map_btn">Apskatīt kartē</span></a>
+        </div>
+        <div class="form-card reveal">
+          <form id="reqForm" novalidate>
+            <div class="form-row">
+              <div class="field" id="fcCompany"><label for="fCompany"><span data-i18n="f_company">Uzņēmums / vārds</span> <i>*</i></label><input id="fCompany" name="company" type="text" autocomplete="organization"></div>
+              <div class="field" id="fcPhone"><label for="fPhone"><span data-i18n="f_phone">Tālrunis</span> <i>*</i></label><input id="fPhone" name="phone" type="tel" autocomplete="tel"></div>
+            </div>
+            <div class="field"><label for="fTopic" data-i18n="f_topic">Tēma</label>
+              <select id="fTopic" name="topic">
+                <option value="svc1" data-i18n="svc1_t">Darba vides risku novērtēšana un noteikšana</option>
+                <option value="svc2" data-i18n="svc2_t">Dokumentācijas izstrādāšana</option>
+                <option value="svc3" data-i18n="svc3_t">Darba vides iekšējās uzraudzības pakalpojumi</option>
+                <option value="svc4" data-i18n="svc4_t">Nelaimes gadījumu darbā izmeklēšana</option>
+                <option value="svc5" data-i18n="svc5_t">Ugunsdrošība</option>
+                <option value="other" data-i18n="opt_other">Cits jautājums</option>
+                <option value="complaint" data-i18n="opt_complaint">Sūdzība vai ieteikums</option>
+              </select>
+            </div>
+            <div class="field"><label for="fMsg" data-i18n="f_msg">Ziņojums</label><textarea id="fMsg" name="message"></textarea></div>
+            <button class="btn btn-solid" type="submit"><svg viewBox="0 0 24 24"><use href="#ic-wa"/></svg><span data-i18n="f_submit">Nosūtīt pieprasījumu</span></button>
+            <p class="form-error" id="formError" role="alert"></p>
+            <p class="form-note" data-i18n="f_note">Atvērsies WhatsApp ar sagatavotu ziņu - pārbaudiet un nosūtiet.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="hazard" aria-hidden="true"></div>
+  <div class="wrap footer-main">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#home" aria-label="Risinājums ABC">
+          <img src="logo.svg" alt="" class="brand-logo" width="40" height="40">
+          <span class="brand-word">RISINĀJUMS <b>ABC</b></span>
+        </a>
+        <p data-i18n="footer_tag">Darba aizsardzība un ugunsdrošība - ceļš uz veiksmi.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4 data-i18n="nav.services">Pakalpojumi</h4>
+          <a href="#services" data-i18n="svc1_t">Darba vides risku novērtēšana un noteikšana</a>
+          <a href="#services" data-i18n="svc2_t">Dokumentācijas izstrādāšana</a>
+          <a href="#services" data-i18n="svc5_t">Ugunsdrošība</a>
+        </div>
+        <div>
+          <h4 data-i18n="nav.contact">Kontakti</h4>
+          <a href="tel:+37129401313">+371 29 401 313</a>
+          <a href="tel:+37126629226">+371 26 629 226</a>
+          <a href="https://wa.me/37129401313" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2012-<span id="yr">2026</span> Risinājums ABC. <span data-i18n="footer_rights">Visas tiesības aizsargātas.</span></span>
+      <div class="footer-lang" role="group" aria-label="Language">
+        <button data-lang="lv" aria-pressed="true">LV</button>
+        <button data-lang="ru" aria-pressed="false">RU</button>
+        <button data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var T = {
+    lv: {
+      skip:"Pāriet uz saturu", slogan:"Ceļš uz veiksmi",
+      "nav.about":"Par mums","nav.services":"Pakalpojumi","nav.process":"Kā strādājam","nav.quality":"Kvalitāte","nav.contact":"Kontakti",
+      cta_request:"Nosūtīt pieprasījumu", cta_services:"Skatīt pakalpojumus",
+      theme_dark:"Tumšais režīms", theme_light:"Gaišais režīms",
+      menu_open:"Atvērt izvēlni", menu_close:"Aizvērt izvēlni",
+      video_pause:"Apturēt fona video", video_play:"Atskaņot fona video",
+      hero_kicker:"Darba aizsardzība un ugunsdrošība",
+      hero_title:"Droša darba vide - ceļš uz veiksmi",
+      hero_lede:"Sertificētu speciālistu komanda darba aizsardzības un ugunsdrošības jomā - Latvijas tirgū kopš 2008. gada.",
+      chip_iso:"ISO 9001", chip_since:"Kopš 2008. gada", chip_cert:"Sertificēti speciālisti",
+      stat1:"uzņēmuma darbības sākums Latvijas tirgū", stat2:"sertificēta kvalitātes vadības sistēma", stat3:"pakalpojumu virzieni darba aizsardzībā un ugunsdrošībā",
+      about_kicker:"Par mums", about_title:"Sertificētu speciālistu komanda",
+      about_p1:"Uzņēmums sekmīgi darbojas Latvijas tirgū jau kopš 2008. gada, sniedzot pakalpojumus darba aizsardzības un ugunsdrošības jomās.",
+      about_p2:"„Risinājums ABC” ir uzņēmums, kas ieguvis kompetentas institūcijas statusu un pilda darba aizsardzības prasības uzņēmumos atbilstoši Latvijas Republikas likumdošanai. Uzņēmums ir sertificēts saskaņā ar standartu ISO 9001.",
+      about_p3:"Speciālisti individuāli izvērtē situāciju katrā uzņēmumā vai iestādē. Pareizi izstrādāta darba aizsardzības sistēma veicinās uzņēmuma attīstību un radīs drošu vidi Jums un Jūsu darbiniekiem.",
+      about_quote:"Mums svarīgas ilgtermiņa, atklātas un uzticības pilnas attiecības, nevis īstermiņa ieguvums.",
+      fact1_t:"ISO 9001", fact1_d:"Sertificēts saskaņā ar kvalitātes vadības standartu",
+      fact2_t:"Kompetentas institūcijas statuss", fact2_d:"Darba aizsardzības prasību izpilde atbilstoši Latvijas likumdošanai",
+      fact3_t:"Sertificēti speciālisti", fact3_d:"Individuāla pieeja katram uzņēmumam un iestādei",
+      services_kicker:"Pakalpojumi", services_title:"Ko mēs piedāvājam",
+      services_sub:"Pilns darba aizsardzības un ugunsdrošības pakalpojumu klāsts - no risku novērtēšanas līdz interešu pārstāvēšanai inspekcijās.",
+      svc1_t:"Darba vides risku novērtēšana un noteikšana",
+      svc1_items:["darba vietu un darba veidu apsekošana un analīze uzņēmumā / iestādē","darba vides iekšējā uzraudzība, preventīvo pasākumu izstrāde un plānošana","individuālo aizsardzības līdzekļu noteikšana un saraksta sagatavošana darbiniekiem","darba vides laboratorisko mērījumu organizēšana darba vietā"],
+      svc2_t:"Dokumentācijas izstrādāšana",
+      svc2_items:["darba aizsardzības instrukciju izstrāde","darba aprīkojuma remonta un apkopes dokumentācijas izstrāde","obligāto veselības pārbaužu karšu sagatavošana darbiniekiem","cita dokumentācija, kas nepieciešama konkrētajam uzņēmumam / iestādei atbilstoši darbības veidam"],
+      svc3_t:"Darba vides iekšējās uzraudzības pakalpojumi",
+      svc3_items:["speciālista vizīte uzņēmumā / iestādē","jaunu darba aizsardzības normatīvo aktu ieviešana un esošo izmaiņu atspoguļošana","interešu pārstāvēšana un aizstāvība darba inspekcijā","konsultācijas","preventīvā plāna izpildes uzraudzība","darbinieku apmācība un instruktāža darba vietās","veselības pārbaužu organizēšana uzņēmumā / iestādē"],
+      svc4_t:"Nelaimes gadījumu darbā izmeklēšana",
+      svc4_items:["nelaimes gadījuma darbā izmeklēšana","nelaimes gadījuma akta sagatavošana","nelaimes gadījuma akta reģistrēšana darba inspekcijā","interešu pārstāvēšana un aizstāvība nelaimes gadījumu izmeklēšanas komisijā darba inspekcijā","konsultācijas par nelaimes gadījumu izmeklēšanu darba vietās"],
+      svc5_t:"Ugunsdrošība",
+      svc5_items:["ugunsdrošības instrukciju izstrāde","darbinieku apmācība un instruktāža ugunsdrošībā","interešu pārstāvēšana un aizstāvība Valsts ugunsdzēsības un glābšanas dienestā"],
+      process_kicker:"Kā mēs strādājam", process_title:"No izvērtēšanas līdz drošai darba videi",
+      step1_t:"Izvērtējam", step1_d:"Apsekojam darba vietas un darba veidus, analizējam situāciju un riskus.",
+      step2_t:"Izstrādājam", step2_d:"Sagatavojam instrukcijas, plānus un nepieciešamo dokumentāciju.",
+      step3_t:"Apmācām", step3_d:"Instruējam un apmācām darbiniekus darba aizsardzībā un ugunsdrošībā.",
+      step4_t:"Uzraugām", step4_d:"Sekojam līdzi izpildei un pārstāvam Jūsu intereses inspekcijās.",
+      quality_kicker:"Kvalitāte", quality_title:"Kvalitātes politika", quality_intro:"SIA „Risinājums ABC” apņemas:",
+      q1:"sniegt kvalitatīvus un nepārtraukti pilnveidotus darba aizsardzības pakalpojumus esošajiem klientiem",
+      q2:"palīdzēt klientiem izveidot un uzturēt drošu darba vidi",
+      q3:"regulāri apgūt jaunas darba vides risku novērtējuma metodes un tehnoloģijas (tehniskos resursus)",
+      q4:"ar savu darba kvalitāti panākt, ka mūs iesaka jauniem klientiem",
+      q5:"ievērojot likumdošanas un citu normatīvo aktu prasības, nepārtraukti tiekties pilnveidot savu pārvaldības sistēmu",
+      survey_t:"Cienījamais klient!", survey_d:"Mēs vēlamies noskaidrot Jūsu viedokli par mūsu sniegtajiem pakalpojumiem. Aptaujas aizpildīšana neaizņems vairāk par 5 minūtēm.", survey_btn:"Aizpildīt aptauju",
+      contact_kicker:"Kontakti", contact_title:"Sazinieties ar mums", contact_lede:"Aprakstiet savu uzdevumu - atbildēsim un piedāvāsim risinājumu.",
+      lbl_address:"Biroja adrese", lbl_phone:"Tālrunis", lbl_messengers:"Sazināties", map_btn:"Apskatīt kartē",
+      f_company:"Uzņēmums / vārds", f_phone:"Tālrunis", f_topic:"Tēma", f_msg:"Ziņojums",
+      opt_other:"Cits jautājums", opt_complaint:"Sūdzība vai ieteikums",
+      f_submit:"Nosūtīt pieprasījumu", f_note:"Atvērsies WhatsApp ar sagatavotu ziņu - pārbaudiet un nosūtiet.",
+      f_error:"Lūdzu, aizpildiet obligātos laukus.", wa_intro:"Pieprasījums no Risinājums ABC mājas lapas",
+      footer_tag:"Darba aizsardzība un ugunsdrošība - ceļš uz veiksmi.", footer_rights:"Visas tiesības aizsargātas.",
+      page_title:"Risinājums ABC - darba aizsardzība un ugunsdrošība, Rēzekne"
+    },
+    ru: {
+      skip:"К содержанию", slogan:"На пути к успеху",
+      "nav.about":"О компании","nav.services":"Услуги","nav.process":"Как мы работаем","nav.quality":"Качество","nav.contact":"Контакты",
+      cta_request:"Отправить запрос", cta_services:"Наши услуги",
+      theme_dark:"Тёмная тема", theme_light:"Светлая тема",
+      menu_open:"Открыть меню", menu_close:"Закрыть меню",
+      video_pause:"Остановить фоновое видео", video_play:"Воспроизвести фоновое видео",
+      hero_kicker:"Охрана труда и пожарная безопасность",
+      hero_title:"Безопасная рабочая среда - путь к успеху",
+      hero_lede:"Команда сертифицированных специалистов по охране труда и пожарной безопасности - на латвийском рынке с 2008 года.",
+      chip_iso:"ISO 9001", chip_since:"С 2008 года", chip_cert:"Сертифицированные специалисты",
+      stat1:"начало работы компании на латвийском рынке", stat2:"сертифицированная система менеджмента качества", stat3:"направлений услуг в сфере охраны труда и пожарной безопасности",
+      about_kicker:"О компании", about_title:"Команда сертифицированных специалистов",
+      about_p1:"Наша компания успешно работает на латвийском рынке с 2008 года, предоставляя услуги в сфере охраны труда и пожарной безопасности.",
+      about_p2:"«Risinājums ABC» - предприятие со статусом компетентного учреждения, которое выполняет требования по охране труда на предприятиях в соответствии с законодательством Латвии и сертифицировано по стандарту ISO 9001.",
+      about_p3:"Наши специалисты индивидуально оценят ситуацию на вашем предприятии. Разработанная и введённая система охраны труда приведёт ваше предприятие к стабильности и безопасности рабочего персонала.",
+      about_quote:"Для нас важны долгосрочные, открытые, доверительные отношения, а не краткосрочная выгода.",
+      fact1_t:"ISO 9001", fact1_d:"Сертифицировано по стандарту менеджмента качества",
+      fact2_t:"Статус компетентного учреждения", fact2_d:"Выполнение требований по охране труда согласно законодательству Латвии",
+      fact3_t:"Сертифицированные специалисты", fact3_d:"Индивидуальный подход к каждому предприятию и учреждению",
+      services_kicker:"Услуги", services_title:"Что мы предлагаем",
+      services_sub:"Полный спектр услуг по охране труда и пожарной безопасности - от оценки рисков до защиты интересов в инспекциях.",
+      svc1_t:"Оценка и определение факторов риска рабочей среды",
+      svc1_items:["обследование и анализ рабочих мест и видов работ на предприятии / в учреждении","внутренний надзор, разработка и планирование превентивных мер рабочей среды","определение и составление списка индивидуальных средств защиты для работников","организация лабораторных замеров среды на рабочем месте"],
+      svc2_t:"Разработка документации",
+      svc2_items:["разработка инструкций по охране труда","разработка документации по ремонту и обслуживанию рабочего оборудования","составление карт для профосмотра рабочего персонала","другая документация, необходимая конкретному предприятию / учреждению по роду деятельности"],
+      svc3_t:"Услуги внутреннего контроля рабочей среды",
+      svc3_items:["визит специалиста на предприятие / в учреждение","введение новых и изменение существующих нормативных актов по охране труда","представление и защита интересов в инспекции по труду","консультации","надзор за исполнением превентивного плана","обучение и инструктаж персонала на рабочих местах","организация профосмотра на предприятии / в учреждении"],
+      svc4_t:"Расследование несчастных случаев на рабочем месте",
+      svc4_items:["расследование несчастного случая на рабочем месте","составление акта о несчастном случае на рабочем месте","регистрация акта о несчастном случае в инспекции по труду","представление и защита интересов в комиссии по расследованию несчастного случая в инспекции по труду","консультации по расследованию несчастных случаев на рабочих местах"],
+      svc5_t:"Пожарная безопасность",
+      svc5_items:["разработка инструкций по пожарной безопасности","обучение и инструктаж персонала по пожарной безопасности","представление и защита интересов в государственной пожарно-спасательной службе"],
+      process_kicker:"Как мы работаем", process_title:"От оценки до безопасной рабочей среды",
+      step1_t:"Оцениваем", step1_d:"Обследуем рабочие места и виды работ, анализируем ситуацию и риски.",
+      step2_t:"Разрабатываем", step2_d:"Готовим инструкции, планы и необходимую документацию.",
+      step3_t:"Обучаем", step3_d:"Проводим инструктаж и обучение персонала по охране труда и пожарной безопасности.",
+      step4_t:"Контролируем", step4_d:"Следим за исполнением и представляем ваши интересы в инспекциях.",
+      quality_kicker:"Качество", quality_title:"Политика качества", quality_intro:"SIA «Risinājums ABC» обязуется:",
+      q1:"предоставлять существующим клиентам качественные и непрерывно совершенствуемые услуги в области охраны труда",
+      q2:"помогать клиентам создавать и поддерживать безопасную рабочую среду",
+      q3:"регулярно осваивать новые методы оценки рисков рабочей среды и технологии (технические ресурсы)",
+      q4:"качеством своей работы добиваться того, чтобы нас рекомендовали новым клиентам",
+      q5:"соблюдая требования законодательства и других нормативных актов, непрерывно стремиться совершенствовать свою систему управления",
+      survey_t:"Уважаемый клиент!", survey_d:"Мы хотим узнать ваше мнение об оказанных нами услугах. Заполнение анкеты займёт не более 5 минут.", survey_btn:"Заполнить анкету",
+      contact_kicker:"Контакты", contact_title:"Свяжитесь с нами", contact_lede:"Опишите вашу задачу - мы ответим и предложим решение.",
+      lbl_address:"Адрес офиса", lbl_phone:"Телефон", lbl_messengers:"Связаться", map_btn:"Смотреть на карте",
+      f_company:"Компания / имя", f_phone:"Телефон", f_topic:"Тема", f_msg:"Сообщение",
+      opt_other:"Другой вопрос", opt_complaint:"Жалоба или пожелание",
+      f_submit:"Отправить запрос", f_note:"Откроется WhatsApp с готовым сообщением - проверьте и отправьте.",
+      f_error:"Пожалуйста, заполните обязательные поля.", wa_intro:"Запрос с сайта Risinājums ABC",
+      footer_tag:"Охрана труда и пожарная безопасность - на пути к успеху.", footer_rights:"Все права защищены.",
+      page_title:"Risinājums ABC - охрана труда и пожарная безопасность, Резекне"
+    },
+    en: {
+      skip:"Skip to content", slogan:"Road to success",
+      "nav.about":"About","nav.services":"Services","nav.process":"How we work","nav.quality":"Quality","nav.contact":"Contact",
+      cta_request:"Send a request", cta_services:"Our services",
+      theme_dark:"Dark mode", theme_light:"Light mode",
+      menu_open:"Open menu", menu_close:"Close menu",
+      video_pause:"Pause background video", video_play:"Play background video",
+      hero_kicker:"Occupational safety and fire safety",
+      hero_title:"A safe workplace is the road to success",
+      hero_lede:"A team of certified occupational safety and fire safety specialists - on the Latvian market since 2008.",
+      chip_iso:"ISO 9001", chip_since:"Since 2008", chip_cert:"Certified specialists",
+      stat1:"company start on the Latvian market", stat2:"certified quality management system", stat3:"service areas in occupational and fire safety",
+      about_kicker:"About us", about_title:"A team of certified specialists",
+      about_p1:"Our company has been working successfully on the Latvian market since 2008, providing services in occupational safety and fire safety.",
+      about_p2:"“Risinājums ABC” holds the status of a competent institution and fulfils occupational safety requirements for companies in line with Latvian legislation. The company is certified to the ISO 9001 standard.",
+      about_p3:"Our specialists assess the situation at your company individually. A properly developed and implemented occupational safety system brings your company stability and safety for your staff.",
+      about_quote:"We value long-term, open and trusting relationships over short-term gain.",
+      fact1_t:"ISO 9001", fact1_d:"Certified to the quality management standard",
+      fact2_t:"Competent institution status", fact2_d:"Occupational safety requirements fulfilled in line with Latvian law",
+      fact3_t:"Certified specialists", fact3_d:"An individual approach for every company and institution",
+      services_kicker:"Services", services_title:"What we offer",
+      services_sub:"A full range of occupational safety and fire safety services - from risk assessment to representing your interests before inspectorates.",
+      svc1_t:"Work environment risk assessment",
+      svc1_items:["inspection and analysis of workplaces and types of work at the company / institution","internal supervision, development and planning of preventive measures","identification and listing of personal protective equipment for employees","organising laboratory measurements of the work environment"],
+      svc2_t:"Documentation development",
+      svc2_items:["development of occupational safety instructions","documentation for repair and maintenance of work equipment","preparation of health check cards for employees","other documentation required by the specific company / institution for its line of work"],
+      svc3_t:"Internal work environment supervision",
+      svc3_items:["specialist visits to the company / institution","introducing new and amended occupational safety regulations","representing and defending your interests at the labour inspectorate","consultations","supervising the execution of the preventive plan","training and instruction of staff at workplaces","organising health checks at the company / institution"],
+      svc4_t:"Workplace accident investigation",
+      svc4_items:["investigation of workplace accidents","preparing the workplace accident report","registering the accident report with the labour inspectorate","representing and defending your interests on the accident investigation commission at the labour inspectorate","consultations on investigating workplace accidents"],
+      svc5_t:"Fire safety",
+      svc5_items:["development of fire safety instructions","training and instruction of staff in fire safety","representing and defending your interests before the State Fire and Rescue Service"],
+      process_kicker:"How we work", process_title:"From assessment to a safe workplace",
+      step1_t:"Assess", step1_d:"We inspect workplaces and types of work and analyse the situation and risks.",
+      step2_t:"Develop", step2_d:"We prepare the instructions, plans and documentation you need.",
+      step3_t:"Train", step3_d:"We instruct and train your staff in occupational safety and fire safety.",
+      step4_t:"Supervise", step4_d:"We follow up on execution and represent your interests before inspectorates.",
+      quality_kicker:"Quality", quality_title:"Quality policy", quality_intro:"SIA “Risinājums ABC” commits to:",
+      q1:"provide existing clients with high-quality, continuously improved occupational safety services",
+      q2:"help clients create and maintain a safe work environment",
+      q3:"regularly learn new work environment risk assessment methods and technologies (technical resources)",
+      q4:"earn recommendations to new clients through the quality of our work",
+      q5:"comply with legislation and other regulations while continuously improving our management system",
+      survey_t:"Dear client!", survey_d:"We would like to hear your opinion about our services. The survey takes no more than 5 minutes.", survey_btn:"Take the survey",
+      contact_kicker:"Contact", contact_title:"Get in touch", contact_lede:"Describe your task - we will reply and propose a solution.",
+      lbl_address:"Office address", lbl_phone:"Phone", lbl_messengers:"Message us", map_btn:"View on map",
+      f_company:"Company / name", f_phone:"Phone", f_topic:"Topic", f_msg:"Message",
+      opt_other:"Other question", opt_complaint:"Complaint or suggestion",
+      f_submit:"Send request", f_note:"WhatsApp will open with a ready message - review and send.",
+      f_error:"Please fill in the required fields.", wa_intro:"Request from the Risinājums ABC website",
+      footer_tag:"Occupational safety and fire safety - the road to success.", footer_rights:"All rights reserved.",
+      page_title:"Risinājums ABC - occupational safety and fire safety, Rēzekne"
+    }
+  };
+
+  var htmlEl = document.documentElement;
+  var currentLang = 'lv';
+  var pageTitleEl = document.getElementById('pageTitle');
+
+  function getTheme(){ return htmlEl.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; }
+
+  function refreshLabels(){
+    var d = T[currentLang];
+    var theme = getTheme();
+    var themeLabel = theme === 'dark' ? d.theme_light : d.theme_dark;
+    var tt = document.getElementById('themeToggle');
+    tt.setAttribute('aria-label', themeLabel);
+    tt.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+    document.getElementById('themeIcon').innerHTML = '<use href="' + (theme === 'dark' ? '#ic-sun' : '#ic-moon') + '"></use>';
+    var mt = document.getElementById('menuToggle');
+    mt.setAttribute('aria-label', mt.getAttribute('aria-expanded') === 'true' ? d.menu_close : d.menu_open);
+    var vid = document.getElementById('heroVideo');
+    document.getElementById('heroPause').setAttribute('aria-label', vid.paused ? d.video_play : d.video_pause);
+  }
+
+  function applyLang(lang){
+    if(!T[lang]) lang = 'lv';
+    currentLang = lang;
+    var d = T[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if(d[k] !== undefined) el.textContent = d[k];
+    });
+    document.querySelectorAll('[data-i18n-list]').forEach(function(ul){
+      var k = ul.getAttribute('data-i18n-list');
+      var arr = d[k] || [];
+      ul.innerHTML = '';
+      arr.forEach(function(txt){ var li = document.createElement('li'); li.textContent = txt; ul.appendChild(li); });
+    });
+    document.querySelectorAll('[data-lang]').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+    htmlEl.setAttribute('lang', lang);
+    if(pageTitleEl) pageTitleEl.textContent = d.page_title;
+    try{ localStorage.setItem('rabc-lang', lang); }catch(e){}
+    var err = document.getElementById('formError'); if(err) err.textContent = '';
+    refreshLabels();
+  }
+
+  document.querySelectorAll('[data-lang]').forEach(function(b){
+    b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
+  });
+
+  /* theme */
+  document.getElementById('themeToggle').addEventListener('click', function(){
+    var next = getTheme() === 'dark' ? 'light' : 'dark';
+    htmlEl.setAttribute('data-theme', next);
+    try{ localStorage.setItem('rabc-theme', next); }catch(e){}
+    refreshLabels();
+  });
+
+  /* mobile + tablet menu */
+  var menuToggle = document.getElementById('menuToggle');
+  var mobileNav = document.getElementById('mobileNav');
+  function setMenu(open){
+    mobileNav.classList.toggle('open', open);
+    mobileNav.setAttribute('aria-hidden', open ? 'false' : 'true');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    refreshLabels();
+  }
+  menuToggle.addEventListener('click', function(){ setMenu(!mobileNav.classList.contains('open')); });
+  mobileNav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && mobileNav.classList.contains('open')) setMenu(false); });
+  window.addEventListener('resize', function(){ if(window.innerWidth >= 1024 && mobileNav.classList.contains('open')) setMenu(false); });
+
+  /* hero video */
+  var vid = document.getElementById('heroVideo');
+  var pauseBtn = document.getElementById('heroPause');
+  var pauseIcon = document.getElementById('heroPauseIcon');
+  function setPauseIcon(){ pauseIcon.innerHTML = '<use href="' + (vid.paused ? '#ic-play' : '#ic-pause') + '"></use>'; pauseBtn.setAttribute('aria-pressed', vid.paused ? 'true' : 'false'); refreshLabels(); }
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ try{ vid.pause(); }catch(e){} }
+  pauseBtn.addEventListener('click', function(){
+    if(vid.paused){ var p = vid.play(); if(p && p.catch) p.catch(function(){}); } else { vid.pause(); }
+    setPauseIcon();
+  });
+  setPauseIcon();
+
+  /* request form -> WhatsApp */
+  var form = document.getElementById('reqForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var d = T[currentLang];
+    var company = document.getElementById('fCompany').value.trim();
+    var phone = document.getElementById('fPhone').value.trim();
+    var sel = document.getElementById('fTopic');
+    var topic = sel.options[sel.selectedIndex].text;
+    var msg = document.getElementById('fMsg').value.trim();
+    var okCompany = company.length > 1;
+    var okPhone = phone.replace(/[^0-9]/g,'').length >= 6;
+    document.getElementById('fcCompany').classList.toggle('invalid', !okCompany);
+    document.getElementById('fcPhone').classList.toggle('invalid', !okPhone);
+    var err = document.getElementById('formError');
+    if(!okCompany || !okPhone){ err.textContent = d.f_error; return; }
+    err.textContent = '';
+    var lines = [d.wa_intro, '', d.f_company + ': ' + company, d.f_phone + ': ' + phone, d.f_topic + ': ' + topic];
+    if(msg) lines.push(d.f_msg + ': ' + msg);
+    var url = 'https://wa.me/37129401313?text=' + encodeURIComponent(lines.join('\n'));
+    window.open(url, '_blank', 'noopener');
+  });
+
+  /* reveal on scroll */
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  var saved = 'lv';
+  try{ saved = localStorage.getItem('rabc-lang') || 'lv'; }catch(e){}
+  applyLang(saved);
+})();
+</script>
+
+</body>
+</html>
